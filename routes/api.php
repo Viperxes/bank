@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/accounts/{account}/balance', 'AccountController@getBalance');
+Route::put('/accounts/{account}/deposit', 'AccountController@deposit');
+Route::put('/accounts/{account}/withdraw', 'AccountController@withdraw');
+Route::post('/accounts/transfer', 'AccountController@transfer');
+Route::get('/accounts/{account}/transactions', 'AccountController@getTransactions');
+
+Route::apiResource('accounts', 'AccountController');
